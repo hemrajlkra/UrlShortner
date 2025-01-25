@@ -3,6 +3,7 @@ const {ConnectToMongo} = require('./connection');  //importing the connection.js
 const urlRoute = require('./routes/url');
 const URL = require('./models/url');
 const staticRouter = require('./routes/staticRouter');
+const userRoute = require('./routes/user');
 const path = require('path');
 const app = express();
 
@@ -16,9 +17,9 @@ app.set('views',path.resolve("./views")); //setting the views directory to the v
 
 app.use(express.json());//middleware to parse the incoming request body
 app.use(express.urlencoded({extended:false}));// this will support the json data along with the form data in the request body
-app.use('/url',urlRoute); //initiation of the url route first phase of routing
 app.use('/',staticRouter); //if the call is "/" then it will be redirected to the staticRouter
-
+app.use('/url',urlRoute); //initiation of the url route first phase of routing
+app.use('/user',userRoute);// if the call is "/user" then it will be redirected to the userRouter
 
 app.get('/url/:shortId',async (req,res)=>{
     const shortId = req.params.shortId;
