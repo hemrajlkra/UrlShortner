@@ -4,6 +4,8 @@ const urlRoute = require('./routes/url');
 const URL = require('./models/url');
 const staticRouter = require('./routes/staticRouter');
 const userRoute = require('./routes/user');
+const {restrictToLoggedUserOnly,checkAuth} = require('./middlewares/auth');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 const app = express();
 
@@ -17,10 +19,14 @@ app.set('views',path.resolve("./views")); //setting the views directory to the v
 
 app.use(express.json());//middleware to parse the incoming request body
 app.use(express.urlencoded({extended:false}));// this will support the json data along with the form data in the request body
-app.use('/',staticRouter); //if the call is "/" then it will be redirected to the staticRouter
-app.use('/url',urlRoute); //initiation of the url route first phase of routing
-app.use('/user',userRoute);// if the call is "/user" then it will be redirected to the userRouter
 
+//adding the middleware below to restrict the access to the url route only to the logged in users
+app.use(cookieParser());
+app.use('/url',restrictToLoggedUserOnly,urlRoute); //initiation of the url route first phase of routing
+app.use('/user',userRoute);// if the call is "/user" then it will be redirected to the userRouter
+//checking auth of user if the user is logged in it will see only urls created by him...
+// if not logged in it will see all the urls
+app.use('/',checkAuth,staticRouter); //if the call is "/" then it will be redirected to the staticRouter
 app.get('/url/:shortId',async (req,res)=>{
     const shortId = req.params.shortId;
     const entry =await URL.findOneAndUpdate(
