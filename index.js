@@ -16,7 +16,8 @@ ConnectToMongo("mongodb://localhost:27017/urlshortner").then(
 
 app.set('view engine','ejs');//setting the view engine to ejs
 app.set('views',path.resolve("./views")); //setting the views directory to the views folder
-
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
 app.use(express.json());//middleware to parse the incoming request body
 app.use(express.urlencoded({extended:false}));// this will support the json data along with the form data in the request body
 

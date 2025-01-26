@@ -4,11 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #5ee8dc, #7ba4c7);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 2rem;
+        }
+
+        form {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        form input {
+            width: 90%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #7eecff;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        form input:focus {
+            border-color: #4ac9ff;
+            outline: none;
+            box-shadow: 0 0 10px rgba(122, 236, 255, 0.8);
+            transform: scale(1.02);
+        }
+
+        form button {
+            padding: 0.75rem 1.5rem;
+            background-color: #4ac9ff;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #39a7cc;
+            transform: scale(1.05);
+        }
+
+        table {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-collapse: collapse;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        table thead {
+            background: #4ac9ff;
+            color: #fff;
+        }
+
+        table th, table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        table tr:hover {
+            background: #899ea2;
+        }
+
+        table th {
+            font-size: 1rem;
+        }
+
+        table td {
+            font-size: 0.9rem;
+        }
+
+        p {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+        a:link {
+            color: rgb(44, 119, 223);
+            background-color: transparent;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <h1>Url Shortner</h1>
     <% if(locals.id) {%>
-        <p> Url generated: http://localhost:8000/url/<%= id %></p>
+        <p> Url generated: <a href="http://localhost:8000/url/<%= id %>" target="_blank">http://localhost:8000/url/<%= id %></a></p>
     <% } %>
     <form method="post" action="/url">
         <label>Enter Original URL</label>
@@ -19,10 +145,12 @@
         <% if(locals.urls){ %>
             <table>
                 <thead>
-                    <th>S.No</th>
-                    <th>ShortId</th>
-                    <th>Redirects</th>
-                    <th>Clicks</th>
+                    <tr>
+                        <th>S.No</th>
+                        <th>ShortId</th>
+                        <th>Redirects</th>
+                        <th>Clicks</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <% urls.forEach((url,index)=>{%>

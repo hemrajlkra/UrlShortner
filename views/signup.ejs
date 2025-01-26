@@ -4,6 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle, #7eecff, #a5eafa, #2ff6f2);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Card-like container for the form */
+        form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Headline styling */
+        h1 {
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            text-align: center;
+            color: #fcfcfc;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Labels and inputs styling */
+        label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #759cff;
+            outline: none;
+            box-shadow: 0 0 10px rgba(5, 122, 138, 0.8);
+            transform: scale(1.02);
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #228cb3;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #27dfd3;
+            transform: scale(1.05);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            input, button {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>User SignUp</h1>
