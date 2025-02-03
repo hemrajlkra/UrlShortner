@@ -3,167 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>URL Shortener</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* General styling */
+                /* Modern styling */
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to bottom right, #5ee8dc, #7ba4c7);
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #343a40;
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            padding: 2rem;
             min-height: 100vh;
         }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         h1 {
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            margin-bottom: 2rem;
-        }
-
-        form {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            margin-bottom: 2rem;
-            width: 100%;
-            max-width: 400px;
             text-align: center;
+            color: #2b2d42;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
         }
 
-        form label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+        /* URL Input Card */
+        .input-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
         }
 
-        form input {
-            width: 90%;
-            padding: 0.75rem;
+        .input-group {
+            display: flex;
+            gap: 1rem;
             margin-bottom: 1rem;
-            border: 1px solid #7eecff;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
             border-radius: 0.5rem;
             font-size: 1rem;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            transition: border-color 0.3s ease;
         }
 
-        form input:focus {
-            border-color: #4ac9ff;
+        .input-group input:focus {
             outline: none;
-            box-shadow: 0 0 10px rgba(122, 236, 255, 0.8);
-            transform: scale(1.02);
+            border-color: #4ac9ff;
+            box-shadow: 0 0 0 3px rgba(74, 201, 255, 0.2);
         }
 
-        form button {
-            padding: 0.75rem 1.5rem;
-            background-color: #4ac9ff;
-            color: #fff;
+        .input-group button {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4ac9ff, #39a7cc);
             border: none;
             border-radius: 0.5rem;
-            font-size: 1rem;
-            font-weight: bold;
+            color: white;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: transform 0.2s ease;
         }
 
-        form button:hover {
-            background-color: #39a7cc;
-            transform: scale(1.05);
+        .input-group button:hover {
+            transform: translateY(-2px);
         }
 
-        table {
-            width: 90%;
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
+        /* URL Table */
+        .url-table {
+            width: 100%;
             border-collapse: collapse;
+            background: white;
             border-radius: 1rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             overflow: hidden;
         }
 
-        table thead {
-            background: #4ac9ff;
-            color: #fff;
+        .url-table thead {
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
         }
 
-        table th, table td {
+        .url-table th {
             padding: 1rem;
-            text-align: center;
-            border: 1px solid #ddd;
+            text-align: left;
+            font-weight: 600;
+            color: #6c757d;
         }
 
-        table tr:nth-child(even) {
-            background: #f9f9f9;
+        .url-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
         }
 
-        table tr:hover {
-            background: #899ea2;
+        .url-table tr:last-child td {
+            border-bottom: none;
         }
 
-        table th {
-            font-size: 1rem;
+        .url-table tr:hover {
+            background: #f8f9fa;
         }
 
-        table td {
-            font-size: 0.9rem;
+        /* Short URL Display */
+        .short-url-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        p {
-            background: #fff;
+        .short-url-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .copy-btn {
+            background: #e9ecef;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: #dee2e6;
+        }
+
+        .stats-badge {
+            background: #4ac9ff;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+            }
+
+            .url-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            body {
+                padding: 1rem;
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
             padding: 1rem;
             border-radius: 0.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 500px;
-            margin-bottom: 2rem;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        a:link {
-            color: rgb(44, 119, 223);
-            background-color: transparent;
-            text-decoration: none;
+
+        .success-message i {
+            color: #10b981;
         }
+
     </style>
 </head>
 <body>
-    <h1>Url Shortner</h1>
-    <% if(locals.id) {%>
-        <p> Url generated: <a href="http://localhost:8000/url/<%= id %>" target="_blank">http://localhost:8000/url/<%= id %></a></p>
-    <% } %>
-    <form method="post" action="/url">
-        <label>Enter Original URL</label>
-        <input type="text" name="url" id="url" placeholder="https://www.example.com">
-        <button type="submit">Generate</button>
-    </form>
-    <div>
+    <div class="container">
+        <h1>Shorten Your Links</h1>
+
+        <% if(locals.id) {%>
+            <div class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <div class="short-url-card">
+                    <div class="short-url-content">
+                        <span>http://localhost:8000/url/</span>
+                        <strong><%= id %></strong>
+                        <button class="copy-btn" onclick="navigator.clipboard.writeText('http://localhost:8000/url/<%= id %>')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+
+        <div class="input-card">
+            <form method="post" action="/url">
+                <div class="input-group">
+                    <input type="text" name="url" id="url" placeholder="Paste your long URL here...">
+                    <button type="submit">Shorten URL</button>
+                </div>
+            </form>
+        </div>
+
         <% if(locals.urls){ %>
-            <table>
+            <table class="url-table">
                 <thead>
                     <tr>
-                        <th>S.No</th>
-                        <th>ShortId</th>
-                        <th>Redirects</th>
+                        <th>Short URL</th>
+                        <th>Original URL</th>
                         <th>Clicks</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% urls.forEach((url,index)=>{%>
                         <tr>
-                            <td><%= index+1 %></td>
-                            <td><%= url.shortId %></td>
-                            <td><%= url.redirectUrl %></td>
-                            <td><%= url.visitHistory.length %></td>
+                            <td>
+                                <div class="short-url-content">
+                                    <span>http://localhost:8000/url/</span>
+                                    <strong><%= url.shortId %></strong>
+                                    <button class="copy-btn" onclick="navigator.clipboard.writeText('http://localhost:8000/url/<%= url.shortId %>')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis;">
+                                <%= url.redirectUrl %>
+                            </td>
+                            <td>
+                                <span class="stats-badge"><%= url.visitHistory.length %></span>
+                            </td>
+                            <td>
+                                <i class="fas fa-circle" style="color: #10b981; font-size: 0.75rem;"></i> Active
+                            </td>
                         </tr>
                     <% }) %>
                 </tbody>
             </table>
         <% } %>
     </div>
+
+    <script>
+        // Add copy feedback
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -4,106 +4,196 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
         /* General body styling */
         body {
-            font-family: 'Poppins', sans-serif;
-            background: radial-gradient(circle, #7eecff, #a5eafa, #2ff6f2);
-            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+        }
+
+        /* Split container */
+        .split-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Left panel styling */
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(-45deg, #ff6b6b, #ff8e8e, #ffafaf, #ffd6d6);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Card-like container for the form */
-        form {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            width: 100%;
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -50px;
+            left: -50px;
+        }
+
+        .left-panel::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            bottom: -80px;
+            right: -80px;
+        }
+
+        .left-panel button {
+            padding: 15px 40px;
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .left-panel button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Right panel styling */
+        .right-panel {
+            flex: 1;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Form styling */
+        .form-container {
+            width: 70%;
             max-width: 400px;
         }
 
-        /* Headline styling */
         h1 {
             margin-bottom: 2rem;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            color: #ff6b6b;
             text-align: center;
-            color: #fcfcfc;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* Labels and inputs styling */
-        label {
-            display: block;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
+        /* Input styling */
+        .input-group {
+            margin-bottom: 1.5rem;
+            position: relative;
         }
 
-        input {
+        .input-group input {
             width: 100%;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 0.5rem;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
             font-size: 1rem;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        input:focus {
-            border-color: #759cff;
+        .input-group input:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.2);
             outline: none;
-            box-shadow: 0 0 10px rgba(5, 122, 138, 0.8);
-            transform: scale(1.02);
         }
 
-        /* Button styling */
-        button {
+        /* Submit button */
+        .submit-btn {
             width: 100%;
-            padding: 0.75rem;
-            background-color: #228cb3;
-            color: #fff;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
             border: none;
-            border-radius: 0.5rem;
-            font-size: 1rem;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
-        button:hover {
-            background-color: #27dfd3;
-            transform: scale(1.05);
+        .submit-btn:hover {
+            transform: translateY(-3px);
+        }
+        a{
+            text-decoration: none;
+            color: white;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
+        /* Animations */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .split-container {
+                flex-direction: column;
             }
 
-            input, button {
-                font-size: 0.9rem;
+            .left-panel {
+                padding: 2rem;
+                flex: none;
+                height: 30vh;
+            }
+
+            .right-panel {
+                flex: none;
+                height: 70vh;
+            }
+
+            .form-container {
+                width: 90%;
             }
         }
     </style>
 </head>
 <body>
-    <h1>User SignUp</h1>
-    <form method="post" action="/user">
-        <label>Full Name:</label>
-        <input type="text" name="name" id="name">
-        <label>Email:</label>
-        <input type="email" name="email" id="email">
-        <label>Password:</label>
-        <input type="text" name="password" id="password">
-
-        <button type="submit">SignUp</button>
-    </form>
+    <div class="split-container">
+        <div class="left-panel">
+            <h1>Join Us!</h1>
+            <button><a href="/login">Already have account!!</a></button>
+        </div>
+        
+        <div class="right-panel">
+            <div class="form-container">
+                <h1>Sign Up</h1>
+                <form method="post" action="/user">
+                    <div class="input-group">
+                        <input type="text" name="name" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
